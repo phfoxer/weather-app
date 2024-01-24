@@ -1,0 +1,25 @@
+@use "./app/theme/theme.scss" as theme;
+
+body {
+  background-color: theme.$pallet1;
+}
+.main {
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100dvh;
+  position: relative;
+  padding: 0 10px;
+  z-index: 9999;
+  position: relative;
+  &_searchbar {
+    margin-top: 50px;
+  }
+}
+
+.sky {
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
+}

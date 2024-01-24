@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Fragment } from "react";
+import { SearchBar } from "./app/components/search-bar/search-bar";
+import { Rain } from "./app/components/rain/rain";
+import Sun from "./app/components/sun/sun";
+import { Could } from "./app/components/cloud/could";
+import styles from "./App.module.scss";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const marginTop = 25;
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Fragment>
+      <div className={styles.main}>
+        <div className={styles.main_searchbar}>
+          <SearchBar />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <div className={styles.sky}>
+        <Sun leftPosition={40} topPosition={0} />
+        <Could leftPosition={0} topPosition={marginTop} bolt={false} />
+        <Could leftPosition={8} topPosition={marginTop} bolt={true} />
+        <Could leftPosition={30} topPosition={marginTop} bolt={true} />
+        <Could leftPosition={45} topPosition={marginTop} bolt={true} />
+        <Could leftPosition={80} topPosition={marginTop} bolt={true} />
+        <Could leftPosition={90} topPosition={marginTop} bolt={true} />
+        <Rain />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Fragment>
+  );
 }
 
-export default App
+export default App;

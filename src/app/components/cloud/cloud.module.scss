@@ -1,4 +1,4 @@
-@use "/app/theme/theme.scss" as theme;
+@use "../../theme/theme.scss" as theme;
 
 .cloud {
   animation: floatAnimation 4s ease-in-out infinite;
