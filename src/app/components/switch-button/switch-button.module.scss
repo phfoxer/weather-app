@@ -1,0 +1,55 @@
+
+@use "../../theme/theme.scss" as theme;
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 27px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    &:checked + .switch_slider {
+      background-color: theme.$pallet1;
+      color: theme.$pallet2;
+    }
+    &:focus + .switch_slider {
+      box-shadow: 0 0 1px theme.$pallet1;
+    }
+    &:checked + .switch_slider:before {
+      transform: translateX(26px);
+    }
+  }
+  &_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    div {
+        padding: 5px;
+    }
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+}

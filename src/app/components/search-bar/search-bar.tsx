@@ -1,30 +1,38 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import WeatherService from "../../services/weather.service";
 import styles from "./search-bar.module.scss";
-import { TLocation } from "../../types";
+import { TLocation, TWeatherUnit } from "../../types";
+import { WeatherEvent } from "../../events/weather.event";
+import SwitchButton from "../switch-button/switch-button";
 
 export const SearchBar = () => {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Salvador");
   const [showList, setShowList] = useState(false);
-  const [cords, setCords] = useState({ lat: 0, lon: 0 });
   const [cityList, setCityList] = useState<TLocation[]>([]);
+  const [unit, setUnit] = useState<TWeatherUnit>("imperial");
+  const [local, setLocal] = useState<TLocation>({} as TLocation);
 
   const searchResults = () => {
-    WeatherService.getLocation(city)
-      .then((res: any) => {
-        setCityList(res.data as TLocation[]);
-      })
-      .catch((err: any) => {
-        
-      });
+    WeatherService.getLocation(city).then((res: any) => {
+      setCityList(res.data as TLocation[]);
+      setShowList(true);
+    });
   };
 
-  const handleSelectCity = (local: TLocation) => {
+  const requestWeather = () => {
     setCity(`${local.name}, ${local.state}, ${local.country}`);
-    setCords({ lat: local.lat, lon: local.lon });
     setShowList(false);
+    WeatherService.getWeather(local.lat, local.lon, unit).then((res: any) => {
+      WeatherEvent.signal({ weather: res.data, unit: unit });
+    });
   };
+
+  useEffect(() => {
+    if (local && local.name) {
+      requestWeather();
+    }
+  }, [local, unit]);
 
   return (
     <Fragment>
@@ -36,11 +44,12 @@ export const SearchBar = () => {
           type="text"
           autoComplete="off"
           value={city}
-          onInput={(e: any) => {
-            setCity(e.target.value);
-            setShowList(true);
-          }}
+          onKeyDown={(e: any) => setCity(e.target.value)}
         />
+        <div className={styles.switchButton}>
+          <SwitchButton onCheck={(_unit) => setUnit(_unit)} />
+        </div>
+
         <button onClick={searchResults} className={styles.searchbar_submit}>
           Search
         </button>
@@ -49,7 +58,7 @@ export const SearchBar = () => {
       {showList && (
         <ul id="city" className={styles.datalist}>
           {cityList.map((item, key) => (
-            <li onClick={() => handleSelectCity(item)} key={key}>
+            <li onClick={() => setLocal(item)} key={key}>
               {item.name}, {item.state}, {item.country}
             </li>
           ))}

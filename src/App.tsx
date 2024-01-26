@@ -4,15 +4,17 @@ import { Rain } from "./app/components/rain/rain";
 import Sun from "./app/components/sun/sun";
 import { Could } from "./app/components/cloud/could";
 import styles from "./App.module.scss";
+import Info from "./app/components/info/info";
 
 function App() {
-  const marginTop = 25;
+  const marginTop = 5;
 
   return (
     <Fragment>
       <div className={styles.main}>
         <div className={styles.main_searchbar}>
           <SearchBar />
+          <Info />
         </div>
       </div>
 

@@ -1,13 +1,18 @@
-type IElPosition {
+export type mainWeather = 'Clouds' | 'Clear' | 'Atmosphere' | 'Snow' | 'Rain' | 'Drizzle' | 'Thunderstorm';
+
+export type TWeatherUnit = 'metric' | 'imperial';
+export type TUnits = '°F' | '°C';
+
+interface IElPosition {
   leftPosition: number;
   topPosition: number;
 };
 
-export type TCloud extends IElPosition {
+export interface TCloud extends IElPosition {
   bolt: boolean;
 };
 
-export type ISun extends IElPosition  {};
+export interface ISun extends IElPosition  {};
 
 export type TLocalNames = {
   os?: string;
@@ -57,7 +62,7 @@ export type TWeather = {
   main: Main
   visibility: number
   wind: Wind
-  rain: Rain
+  rain?: Rain
   clouds: Clouds
   dt: number
   sys: Sys

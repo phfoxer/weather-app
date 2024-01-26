@@ -1,0 +1,61 @@
+@use "../../theme/theme.scss" as theme;
+
+.info {
+  background-color: theme.$pallet2;
+  width: 100%;
+  min-height: 100px;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 20px;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  padding: 10px;
+
+  &:after {
+    content: "";
+    background-color: theme.$pallet2;
+    opacity: 0.5;
+    margin-top: -10px;
+    margin-left: -10px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    inset: 0;
+    position: absolute;
+    padding: 10px;
+    z-index: -1;
+    box-sizing: border-box;
+    border-radius: 12px;
+    margin-top: -5px;
+    margin-left: -5px;
+    backdrop-filter: blur(10px);
+  }
+  &_header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-between;
+    &__title {
+      font-size: 1.5rem;
+      color: theme.$pallet4;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 10px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 1.4rem;
+        color: lighten(theme.$pallet4, 10%);
+        margin-left: 10px;
+      }
+    }
+  }
+  &_body {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 10px;
+    font-size: 1.2rem;
+  }
+}

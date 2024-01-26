@@ -11,6 +11,11 @@
   border-radius: 40px;
   align-items: center;
   box-sizing: border-box;
+  opacity: 0.9;
+  &:active,
+  &:focus-within {
+    opacity: 1;
+  }
   &_submit {
     width: 100px;
     height: 40px;
@@ -70,6 +75,7 @@
   overflow-y: auto;
   list-style-type: none;
   backdrop-filter: blur(50px);
+  z-index: 2;
 
   li {
     background-color: transparent;
@@ -85,4 +91,10 @@
     background-color: theme.$pallet1;
     color: theme.$pallet2;
   }
+}
+.switchButton {
+  position: absolute;
+  z-index: 99;
+  right: 0;
+  margin-right: 110px;
 }
